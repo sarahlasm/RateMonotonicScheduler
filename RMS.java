@@ -1,5 +1,6 @@
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.Semaphore;
+import java.util.Scanner;
 
 /**
 * Assignment 3: Rate Monotonic Scheduler
@@ -16,6 +17,9 @@ public class RMS
   */
   public static void main(String[] args)
   {
+    System.out.println("Press ENTER to start.");
+    Scanner sc = new Scanner(System.in);
+    sc.next();
     int[] taskLengths = {1, 2, 4, 16};
     System.out.println("Running nominal case...");
     runTests(taskLengths);
@@ -60,6 +64,14 @@ public class RMS
     for (int i = 0; i < 10 * 16 - 1; ++i)
     {
       schedulerSem.release();
+    }
+    try
+    {
+      Thread.sleep(10);
+    }
+    catch (Exception e)
+    {
+      System.out.println(e);
     }
     run.set(false);
     schedulerSem.release();
